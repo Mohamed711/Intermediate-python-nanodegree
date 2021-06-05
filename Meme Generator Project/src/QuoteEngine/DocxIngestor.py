@@ -1,19 +1,20 @@
-import pandas as pd
+import docx
 from typing import List
+
 
 from .IngestorInterface import IngestorInterface, IngestorError
 from .QuoteModel import QuoteModel
 
 
-class CSVIngestor(IngestorInterface):
-    """ Extract the quotes information from CSV files """
+class DocxIngestor(IngestorInterface):
+    """ Extract the quotes information from Docx files """
 
-    supported_extensions = ['csv']
+    supported_extensions = ['docx']
 
     @classmethod
     def parse(cls, path: str) -> List[QuoteModel]:
         """
-        Extract Quote information from CSV files
+        Extract Quote information from Docx files
         :param path: Path of the file
         :return: List of the QuoteModels in this file
         """
@@ -21,10 +22,12 @@ class CSVIngestor(IngestorInterface):
             raise IngestorError(f'Parse is called with wrong type')
 
         quotes = list()
-        quotes_df = pd.read_csv(path, header=0)
+        doc = docx.Document(path)
 
-        for _, parsed_quote in quotes_df.iterrows():
-            quote = QuoteModel(parsed_quote['body'], parsed_quote['author'])
-            quotes.append(quote)
+        for paragraph in doc.paragraphs:
+            if paragraph.ext != "":
+                parse = paragraph.text.split('-')
+                quote = QuoteModel(parse[0], parse[1])
+                quotes.append(quote)
 
         return quotes

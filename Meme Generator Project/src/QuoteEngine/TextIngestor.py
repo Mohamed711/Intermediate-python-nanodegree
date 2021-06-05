@@ -4,7 +4,7 @@ from typing import List
 from .QuoteModel import QuoteModel
 
 
-class TxtIngestor(IngestorInterface):
+class TextIngestor(IngestorInterface):
     """ Extract the quotes information from text files """
 
     supported_extensions = ['txt']

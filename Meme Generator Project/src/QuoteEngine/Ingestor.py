@@ -6,13 +6,14 @@ from .QuoteModel import QuoteModel
 from .DocxIngestor import DocxIngestor
 from .CSVIngestor import CSVIngestor
 from .PDFIngestor import PDFIngestor
-from .TxtIngestor import TxtIngestor
+from .TextIngestor import TextIngestor
 
 
 class Ingestor(IngestorInterface):
     """ Select the appropriate ingestor """
 
-    supported_ingestors = [CSVIngestor, PDFIngestor, TxtIngestor, DocxIngestor]
+    supported_ingestors = [CSVIngestor, PDFIngestor,
+                           TextIngestor, DocxIngestor]
 
     @classmethod
     def parse(cls, path: str) -> List[QuoteModel]:
