@@ -4,6 +4,14 @@ from typing import List
 from .QuoteModel import QuoteModel
 
 
+class IngestorError(AssertionError):
+    """
+    Exception raised when a realized ingestor is called with
+    wrong file type
+    """
+    pass
+
+
 class IngestorInterface(ABC):
     """
     Quote Ingestor abstract class to be realized by different
