@@ -8,8 +8,8 @@ class QuoteModel:
         :param quote: The body of the quote
         :param author: The author of the quote
         """
-        self.quote = quote
+        self.body = quote
         self.author = author
 
     def __repr__(self):
-        return f'"{self.quote}" - {self.author}'
+        return f'"{self.body}" - {self.author}'

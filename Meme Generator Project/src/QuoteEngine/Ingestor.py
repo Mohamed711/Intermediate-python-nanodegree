@@ -9,6 +9,14 @@ from .PDFIngestor import PDFIngestor
 from .TextIngestor import TextIngestor
 
 
+class NotSupportedFileExtension(NotImplementedError):
+    """
+    Exception Raised when the extension of the file
+    is not supported by the different ingestors.
+    """
+    pass
+
+
 class Ingestor(IngestorInterface):
     """ Select the appropriate ingestor """
 
@@ -25,3 +33,6 @@ class Ingestor(IngestorInterface):
         for ingestor in cls.supported_ingestors:
             if ingestor.can_ingest(path):
                 return ingestor.parse(path)
+
+        raise NotSupportedFileExtension(f'The extension of this file: '
+                                        f'{path} is not supported')
