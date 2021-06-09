@@ -42,7 +42,8 @@ def generate_meme(path=None, body=None, author=None):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="This is MemeGenerator CLI Parser")
+    parser = argparse.ArgumentParser(
+        description="This is MemeGenerator CLI Parser")
     parser.add_argument("--path", type=str, default=None,
                         help='path to an image file')
     parser.add_argument("--body", type=str, default=None,

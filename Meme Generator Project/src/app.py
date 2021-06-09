@@ -66,15 +66,14 @@ def meme_post():
     body = request.form.get('body')
     author = request.form.get('author')
 
-    try:
-        response = requests.get(img, allow_redirects=True)
-    except RequestException:
-        print("Can't accees the given image URL")
-
-    # save the image in a temporary file
     temp_file = Path(f'./tmp/{random.randint(0, 100000000)}.png')
     temp_file.parent.mkdir(exist_ok=True)
-    open(temp_file, 'wb').write(response.content)
+
+    try:
+        response = requests.get(img, allow_redirects=True)
+        open(temp_file, 'wb').write(response.content)
+    except RequestException:
+        print("Can't accees the given image URL")
 
     # create the meme using the temporary downloaded image
     quote = QuoteModel(body, author)
