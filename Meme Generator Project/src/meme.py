@@ -36,19 +36,18 @@ def generate_meme(path=None, body=None, author=None):
             raise Exception('Author Required if Body is Used')
         quote = QuoteModel(body, author)
 
-    # meme = MemeEngine('./tmp')
-    meme = MemeEngine(r'F:\CoursesTaken\Intermediate-python-'
-                      r'nanodegree\Meme Generator Project')
+    meme = MemeEngine('./tmp')
     path = meme.make_meme(img, quote.body, quote.author)
     return path
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="")
-    parser.add_argument("--path", type=str, help='path to an image file')
-    parser.add_argument("--body", type=str, default='Quote Body',
+    parser = argparse.ArgumentParser(description="This is MemeGenerator CLI Parser")
+    parser.add_argument("--path", type=str, default=None,
+                        help='path to an image file')
+    parser.add_argument("--body", type=str, default=None,
                         help='quote body to add to the image')
-    parser.add_argument("--author", type=str, default='Author Name',
+    parser.add_argument("--author", type=str, default=None,
                         help='quote author to add to the image')
 
     args = parser.parse_args()
